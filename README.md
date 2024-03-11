@@ -1,6 +1,13 @@
 RISC-V GNU Compiler Toolchain
 =============================
 
+### rcore configuration
+```bash
+git clone git@github.com:agh-riscv/riscv-gnu-toolchain.git
+./configure --prefix=/opt/riscv_24_01_11 --with-arch=rv32i --with-abi=ilp32
+make -j $(nproc)
+```
+
 This is the RISC-V C and C++ cross-compiler. It supports two build modes:
 a generic ELF/Newlib toolchain and a more sophisticated Linux-ELF/glibc
 toolchain.
@@ -16,7 +23,7 @@ so `--recursive` or `git submodule update --init --recursive` is not needed.
 
 ### Prerequisites
 
-Several standard packages are needed to build the toolchain.  
+Several standard packages are needed to build the toolchain.
 
 On Ubuntu, executing the following command should suffice:
 
@@ -25,7 +32,7 @@ On Ubuntu, executing the following command should suffice:
 On Fedora/CentOS/RHEL OS, executing the following command should suffice:
 
     $ sudo yum install autoconf automake python3 libmpc-devel mpfr-devel gmp-devel gawk  bison flex texinfo patchutils gcc gcc-c++ zlib-devel expat-devel
-    
+
 On Arch Linux, executing the following command should suffice:
 
     $ sudo pacman -Syyu autoconf automake curl python3 libmpc mpfr gmp gawk base-devel bison flex texinfo gperf libtool patchutils bc zlib expat
@@ -88,7 +95,7 @@ To build either cross-compiler with support for both 32-bit and
 64-bit, run the following command:
 
     ./configure --prefix=/opt/riscv --enable-multilib
-    
+
 And then either `make`, `make linux` or `make musl` for the Newlib, Linux
 glibc-based or Linux musl libc-based cross-compiler, respectively.
 
@@ -190,8 +197,8 @@ rv64imac with lp64 and rv64imafc with lp64 will reuse this multi-lib set.
 The Dejagnu test suite has been ported to RISC-V. This can be run with a
 simulator for the elf and linux toolchains. The simulator can be selected
 by the SIM variable in the Makefile, e.g. SIM=qemu, SIM=gdb, or SIM=spike
-(experimental).In addition, the simulator can also be selected with the 
-configure time option `--with-sim=`.However, the testsuite allowlist is 
+(experimental).In addition, the simulator can also be selected with the
+configure time option `--with-sim=`.However, the testsuite allowlist is
 only mintained for qemu.Other simulators might get extra failures.
 
 #### Additional Prerequisite
